@@ -34,7 +34,8 @@ bindsym $mod+Return exec terminal
 bindsym $mod+Shift+q kill
 
 # start program launcher
-bindsym $mod+d exec --no-startup-id dmenu_recency
+bindsym $mod+d exec rofi -show combi
+#bindsym $mod+d exec --no-startup-id rofi -show run
 
 # launch categorized menu
 bindsym $mod+z exec --no-startup-id morc_menu
@@ -69,15 +70,16 @@ bindsym $mod+Mod1+Right exec /usr/local/bin/spot.sh next
 bindsym $mod+Ctrl+b exec terminal -e 'bmenu'
 bindsym $mod+F2 exec palemoon
 bindsym $mod+F3 exec pcmanfm
-bindsym $mod+Ctrl+y exec ranger
+bindsym $mod+Ctrl+y exec terminal -e 'ranger'
 bindsym $mod+Shift+F3 exec gksu pcmanfm
 bindsym $mod+F5 exec terminal -e 'mocp'
 bindsym $mod+t exec --no-startup-id pkill compton
 bindsym $mod+Ctrl+t exec --no-startup-id compton -b
 bindsym $mod+Shift+d --release exec "killall dunst; exec notify-send 'restart dunst'"
-bindsym Print exec --no-startup-id i3-scrot
-bindsym $mod+Print --release exec --no-startup-id i3-scrot -w
-bindsym $mod+Shift+Print --release exec --no-startup-id i3-scrot -s
+#bindsym Print exec --no-startup-id i3-scrot
+bindsym Print exec --no-startup-id flameshot gui
+#bindsym $mod+Print --release exec --no-startup-id i3-scrot -w
+#bindsym $mod+Shift+Print --release exec --no-startup-id i3-scrot -s
 bindsym $mod+Shift+h exec xdg-open /usr/share/doc/manjaro/i3_help.pdf
 bindsym $mod+Ctrl+x --release exec --no-startup-id xkill
 
@@ -108,7 +110,8 @@ bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
 
 # workspace back and forth (with/without active container)
-workspace_auto_back_and_forth yes
+# for whatever reason, this throws firefox dialogs to the back_and_forth workspace (so last one used before firefox)
+# workspace_auto_back_and_forth yes
 bindsym $mod+b workspace back_and_forth
 bindsym Mod1+Tab workspace back_and_forth
 bindsym $mod+Shift+b move container to workspace back_and_forth; workspace back_and_forth
@@ -164,23 +167,26 @@ set $ws5 5
 set $ws6 6
 set $ws7 7
 set $ws8 8
+set $ws9 9
 #set $ws11 11
 #set $ws12 12
 #set $ws13 13
 #set $ws14 14
+# Steam
+set $ws37 37:
 # LaTeX
 set $ws38 38:
 # PDF Output
 set $ws39 39:
 # Emacs
-set $ws40 40:Emacs
+set $ws40 40:
 # Spotify
 set $ws41 41:
 # KeepassX2
 set $ws42 42:
 
 # switch to workspace
-bindsym $mod+1 workspace $ws1
+bindsym $mod+1 workspace $ws1; layout tabbed;
 bindsym $mod+2 workspace $ws2
 bindsym $mod+3 workspace $ws3
 bindsym $mod+4 workspace $ws4
@@ -188,6 +194,7 @@ bindsym $mod+5 workspace $ws5
 bindsym $mod+6 workspace $ws6
 bindsym $mod+7 workspace $ws7
 bindsym $mod+8 workspace $ws8
+bindsym $mod+9 workspace $ws9
 #bindsym $mod+Tab+1 workspace $ws11
 #bindsym $mod+Tab+2 workspace $ws12
 #bindsym $mod+Tab+3 workspace $ws13
@@ -206,6 +213,7 @@ bindsym $mod+Ctrl+5 move container to workspace $ws5
 bindsym $mod+Ctrl+6 move container to workspace $ws6
 bindsym $mod+Ctrl+7 move container to workspace $ws7
 bindsym $mod+Ctrl+8 move container to workspace $ws8
+bindsym $mod+Ctrl+9 move container to workspace $ws9
 #bindsym $mod+Ctrl+Tab+1 move container to workspace $ws11
 #bindsym $mod+Ctrl+Tab+2 move container to workspace $ws12
 #bindsym $mod+Ctrl+Tab+3 move container to workspace $ws13
@@ -224,6 +232,7 @@ bindsym $mod+Shift+5 move container to workspace $ws5; workspace $ws5
 bindsym $mod+Shift+6 move container to workspace $ws6; workspace $ws6
 bindsym $mod+Shift+7 move container to workspace $ws7; workspace $ws7
 bindsym $mod+Shift+8 move container to workspace $ws8; workspace $ws8
+bindsym $mod+Shift+9 move container to workspace $ws9; workspace $ws9
 #bindsym $mod+Shift+Tab+1 move container to workspace $ws11; workspace $ws11
 #bindsym $mod+Shift+Tab+2 move container to workspace $ws12; workspace $ws12
 #bindsym $mod+Shift+Tab+3 move container to workspace $ws13; workspace $ws13
@@ -236,21 +245,25 @@ bindsym $mod+Shift+8 move container to workspace $ws8; workspace $ws8
 
 # Open applications on specific workspaces
 # assign [class="Rambox"] $ws1
-# assign [class="^Firefox$"] $ws2
+# assign [instance="firefox"] $ws2
 # assign [class="Pcmanfm"] $ws3
 # assign [class="Skype"] $ws5
 assign [class="^Zathura$"] $ws39
+assign [class="^okular$"] $ws39
 
-for_window [class="Rambox"] move container to workspace $ws1
+#for_window [class="Rambox"] move container to workspace $ws1
+for_window [class="^wavebox"] move container to workspace $ws1
+for_window [class="Signal"] move container to workspace $ws1
 for_window [class="Firefox"] move container to workspace $ws2
+for_window [class="Steam"] move container to workspace $ws37
 for_window [class="Texmaker"] move container to workspace $ws38
-for_window [class="Emacs"] move container to workspace $ws40
+for_window [class="Standard Notes"] move container to workspace $ws40
 for_window [class="Spotify"] move container to workspace $ws41
-for_window [class="Keepassx2"] move container to workspace $ws42
+for_window [class="keepassxc"] move container to workspace $ws42
 
 for_window [class="^Spotify$"] focus
-for_window [class="^Keepassx2$"] focus
-for_window [class="^Emacs$"] focus
+for_window [class="^keepassxc$"] focus
+for_window [class="^Standard Notes$"] focus
 for_window [class="^Texmaker$"] focus
 for_window [class="^Zathura$"] focus
 
@@ -287,6 +300,7 @@ for_window [class="feh"] floating enable
 for_window [class="palemoon"] floating enable
 for_window [class="mpv"] floating enable
 for_window [class="vlc"] floating enable
+#for_window [class="Tor Browser"] floating enable resize set 1280 1080
 
 # switch to workspace with urgent window automatically
 for_window [urgent=latest] focus
@@ -304,10 +318,10 @@ bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcu
 bindsym $mod+0 mode "$mode_system"
 # Suspend doesn't work because of SSD, Hibernate is bad anyway
 # set $mode_system (l)ock, (e)xit, switch_(u)ser, (s)uspend, (h)ibernate, (r)eboot, (Shift+s)hutdown
-set $mode_system (l)ock, (e)xit, switch_(u)ser, (r)eboot, (Shift+s)hutdown
+set $mode_system (l)ock, (e)xit, (s)uspend, switch_(u)ser, (r)eboot, (Shift+s)hutdown
 mode "$mode_system" {
     bindsym l exec --no-startup-id i3exit lock, mode "default"
-#    bindsym s exec --no-startup-id i3exit suspend, mode "default"
+    bindsym s exec --no-startup-id i3exit suspend, mode "default"
     bindsym u exec --no-startup-id i3exit switch_user, mode "default"
     bindsym e exec --no-startup-id i3exit logout, mode "default"
 #    bindsym h exec --no-startup-id i3exit hibernate, mode "default"
@@ -345,23 +359,32 @@ mode "resize" {
 
 # Lock screen
 # bindsym $mod+9 exec --no-startup-id blurlock
-bindsym $mod+9 exec --no-startup-id 3lock -i /home/panda/Pictures/Wallhaven/Cortex-Wallpaper2.png -c '#000000' -o '#191d0f' -w '#8F3535' -l '#358F8F' -e -f --24
+# bindsym $mod+9 exec --no-startup-id i3lock -i /home/panda/Pictures/Wallhaven/Cortex-Wallpaper2.png -c '#000000' -o '#191d0f' -w '#8F3535' -l '#358F8F' -e -f --24
 # bindsym ctrl+Mod1+l exec --no-startup-id blurlock
 bindsym ctrl+Mod1+l exec --no-startup-id i3lock -i /home/panda/Pictures/Wallhaven/Cortex-Wallpaper2.png -c '#000000' -o '#191d0f' -w '#8F3535' -l '#358F8F' -e -f --24
 
 # Autostart applications
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
-exec --no-startup-id nitrogen --restore; sleep 1; compton -b
-#exec --no-startup-id manjaro-hello
+# exec --no-startup-id nitrogen --restore; sleep 1; compton -b
+# exec --no-startup-id wallpaper.sh
+exec --no-startup-id bash /home/panda/bin/wallpaper.sh
+exec --no-startup-id compton -b
+# exec --no-startup-id wallpaper.sh
+# exec --no-startup-id manjaro-hello
+# exec --no-startup-id sleep 1; compton -b
 exec --no-startup-id nm-applet
 exec --no-startup-id xfce4-power-manager
 exec --no-startup-id pamac-tray
 exec --no-startup-id clipit
 exec --no-startup-id blueman-applet
-exec --no-startup-id "sh -c 'sleep 10; exec dropbox'"
-exec --no-startup-id "sh -c 'sleep 10; exec megasync'"
-exec --no-startup-id "sh -c 'sleep 10; exec rambox'"
-exec --no-startup-id "sh -c 'sleep 10; exec firefox'"
+# exec --no-startup-id "sh -c 'sleep 1; exec dropbox'"
+#exec --no-startup-id "sh -c 'sleep 1; exec megasync'"
+exec --no-startup-id "sh -c 'sleep 1; exec nextcloud'"
+exec --no-startup-id "sh -c 'sleep 8; exec signal-desktop'"
+#exec --no-startup-id "sh -c 'sleep 9; exec rambox'"
+exec --no-startup-id "sh -c 'sleep 9; exec wavebox'"
+
+exec --no-startup-id "sh -c 'sleep 7; exec firefox'"
 # exec --no-startup-id i3-msg 'workspace 1; exec rambox'
 # exec --no-startup-id i3-msg 'workspace 2; exec firefox'
 # exec_always --no-startup-id sbxkb
@@ -371,8 +394,8 @@ exec --no-startup-id start_conky_maia
 exec --no-startup-id xautolock -time 50 -locker i3lock -i /home/panda/Pictures/Wallhaven/Cortex-Wallpaper2.png -c '#000000' -o '#191d0f' -w '#8F3535' -l '#358F8F' -e -f --24
 exec_always --no-startup-id ff-theme-util
 exec_always --no-startup-id fix_xcursor
-for_window [class="Rambox"] move container to workspace $ws1
-for_window [class="Firefox"] move container to workspace $ws2
+# for_window [class="Rambox"] move container to workspace $ws1
+# for_window [class="Firefox"] move container to workspace $ws2
 
 
 # Color palette used for the terminal ( ~/.Xresources file )
@@ -408,7 +431,7 @@ set_from_resource $term_color15    color15
 
 # Start i3bar to display a workspace bar (plus the system information i3status if available)
 bar {
-	i3bar_command i3bar
+	i3bar_command i3bar -t
 	status_command i3status
 	# status_command "/etc/spot.sh"
     position bottom

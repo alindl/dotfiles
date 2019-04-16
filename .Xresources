@@ -146,7 +146,7 @@ URxvt*saveLines:                  5000
 ! URxvt*scrollTtyKeypress:         boolean
 ! URxvt*scrollWithBuffer:          boolean
 ! URxvt*tintColor:                 !7DA55
-! URxvt*blurRadius:                HxV
+! URxvt*blurRadius:                20
 ! URxvt*fading:                    number
 ! URxvt*fadeColor:                 color
 ! URxvt*utmpInhibit:               boolean
@@ -183,7 +183,7 @@ URxvt*saveLines:                  5000
 ! URxvt*troughColor:               color
 ! URxvt*highlightColor:            color
 ! URxvt*highlightTextColor:        color
-! URxvt*cursorColor:               color
+URxvt*cursorColor:               Light Blue
 ! URxvt*cursorColor2:              color
 ! URxvt*pointerColor:              color
 ! URxvt*pointerColor2:             color
