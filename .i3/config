@@ -8,7 +8,7 @@ set $mod Mod4
 # workspace_layout tabbed <stacking|tabbed>
 
 # Configure border style <normal|1pixel|pixel xx|none|pixel>
-new_window pixel 1
+new_window pixel 2
 new_float normal
 
 # Hide borders
@@ -58,6 +58,14 @@ bindsym $mod+Ctrl+m exec terminal -e 'alsamixer'
 
 # Toggle touchpad
 bindsym XF86TouchpadToggle exec /usr/local/bin/touchpad_toggle.sh
+
+# Emoji rofi because why not 
+bindsym $mod+Shift+a exec rofimoji --skin-tone medium-light --max-recent 0
+
+# Move workspace between screens
+bindsym $mod+Shift+less move workspace to output right
+bindsym $mod+less move workspace to output left
+
 
 # Media Controls
 bindsym $mod+Mod1+Up exec /usr/local/bin/spot.sh playpause
@@ -125,7 +133,7 @@ bindsym $mod+q split toggle
 bindsym $mod+f fullscreen toggle
 
 # change container layout (stacked, tabbed, toggle split)
-bindsym $mod+s layout stacking
+# bindsym $mod+s layout stacking # because it sucks
 bindsym $mod+w layout tabbed
 bindsym $mod+e layout toggle split
 
@@ -133,7 +141,7 @@ bindsym $mod+e layout toggle split
 bindsym $mod+Shift+space floating toggle
 
 # change focus between tiling / floating windows
-bindsym $mod+space focus mode_toggle
+# bindsym $mod+space focus mode_toggle
 
 # toggle sticky
 bindsym $mod+Shift+s sticky toggle
@@ -157,33 +165,35 @@ bindsym $mod+Ctrl+Left workspace prev
 # to display names or symbols instead of plain workspace numbers you can use
 # something like: set $ws1 1:mail
 #                 set $ws2 2:
-# Rambox
-set $ws1 1:
+# Wavebox/Ferdi/Signal
+set $ws1 1:💬
 # Firefox
-set $ws2 2:
-set $ws3 3
-set $ws4 4
-set $ws5 5
-set $ws6 6
-set $ws7 7
-set $ws8 8
-set $ws9 9
+set $ws2 2:🌐
+set $ws3 3:三
+set $ws4 4:四
+set $ws5 5:五
+set $ws6 6:六
+set $ws7 7:七
+set $ws8 8:八
+set $ws9 9:九
 #set $ws11 11
 #set $ws12 12
 #set $ws13 13
 #set $ws14 14
 # Steam
-set $ws37 37:
-# LaTeX
-set $ws38 38:
+set $ws37 37:🎲
+# Anki
+set $ws38 38:暗記
 # PDF Output
-set $ws39 39:
-# Emacs
-set $ws40 40:
+set $ws39 39:📜
+# Notes
+set $ws40 40:📝
 # Spotify
-set $ws41 41:
+set $ws41 41:🎶
 # KeepassX2
-set $ws42 42:
+set $ws42 42:🔑
+# Movies
+set $ws43 43:🍿
 
 # switch to workspace
 bindsym $mod+1 workspace $ws1; layout tabbed;
@@ -245,27 +255,35 @@ bindsym $mod+Shift+9 move container to workspace $ws9; workspace $ws9
 
 # Open applications on specific workspaces
 # assign [class="Rambox"] $ws1
-# assign [instance="firefox"] $ws2
+assign [class="^firefox$"] $ws2
 # assign [class="Pcmanfm"] $ws3
 # assign [class="Skype"] $ws5
 assign [class="^Zathura$"] $ws39
-assign [class="^okular$"] $ws39
+assign [class="okular"] $ws39
 
 #for_window [class="Rambox"] move container to workspace $ws1
-for_window [class="^wavebox"] move container to workspace $ws1
-for_window [class="Signal"] move container to workspace $ws1
-for_window [class="Firefox"] move container to workspace $ws2
+#for_window [class="^Wavebox$"] move container to workspace $ws1
+#for_window [class="^wavebox$"] move container to workspace $ws1
+#for_window [class="Wavebox"] move container to workspace $ws1
+for_window [class="^Ferdi$"] move container to workspace $ws1
+#for_window [class="^ferdi$"] move container to workspace $ws1
+#for_window [class="Ferdi"] move container to workspace $ws1
+for_window [class="^Signal"] move container to workspace $ws1
+for_window [class="^firefox$"] move container to workspace $ws2
 for_window [class="Steam"] move container to workspace $ws37
-for_window [class="Texmaker"] move container to workspace $ws38
+for_window [class="Anki"] move container to workspace $ws38
 for_window [class="Standard Notes"] move container to workspace $ws40
 for_window [class="Spotify"] move container to workspace $ws41
-for_window [class="keepassxc"] move container to workspace $ws42
+for_window [class="KeePassXC"] move container to workspace $ws42
+for_window [class="Popcorn-Time"] move container to workspace $ws43
+#for_window [class="okular"] move container to workspace $ws39
 
 for_window [class="^Spotify$"] focus
 for_window [class="^keepassxc$"] focus
 for_window [class="^Standard Notes$"] focus
 for_window [class="^Texmaker$"] focus
 for_window [class="^Zathura$"] focus
+for_window [class="Popcorn-Time"] focus
 
 
 # Open specific applications in floating mode
@@ -367,9 +385,12 @@ bindsym ctrl+Mod1+l exec --no-startup-id i3lock -i /home/panda/Pictures/Wallhave
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 # exec --no-startup-id nitrogen --restore; sleep 1; compton -b
 # exec --no-startup-id wallpaper.sh
-exec --no-startup-id bash /home/panda/bin/wallpaper.sh
+# exec --no-startup-id bash /home/panda/bin/wallpaper.sh
 exec --no-startup-id compton -b
 # exec --no-startup-id wallpaper.sh
+
+#exec --no-startup-id nitrogen --set-auto --random /usr/share/backgrounds/LinuxWallpaper/Cortex-Wallpaper2.png
+exec --no-startup-id nitrogen --set-auto /usr/share/backgrounds/vim-cortex-wallpaper.png
 # exec --no-startup-id manjaro-hello
 # exec --no-startup-id sleep 1; compton -b
 exec --no-startup-id nm-applet
@@ -377,17 +398,21 @@ exec --no-startup-id xfce4-power-manager
 exec --no-startup-id pamac-tray
 exec --no-startup-id clipit
 exec --no-startup-id blueman-applet
-# exec --no-startup-id "sh -c 'sleep 1; exec dropbox'"
-#exec --no-startup-id "sh -c 'sleep 1; exec megasync'"
-exec --no-startup-id "sh -c 'sleep 1; exec nextcloud'"
+exec --no-startup-id "sh -c 'sleep 5; nordvpn c Austria'"
+exec --no-startup-id "sh -c 'sleep 6; exec dropbox'"
+exec --no-startup-id "sh -c 'sleep 6; exec megasync'"
+#exec --no-startup-id "sh -c 'sleep 1; exec nextcloud'"
 exec --no-startup-id "sh -c 'sleep 8; exec signal-desktop'"
 #exec --no-startup-id "sh -c 'sleep 9; exec rambox'"
-exec --no-startup-id "sh -c 'sleep 9; exec wavebox'"
+#exec --no-startup-id "sh -c 'sleep 9; exec /opt/wavebox.io/wavebox/wavebox-launcher %U'"
+exec --no-startup-id "sh -c 'sleep 9; exec /usr/bin/ferdi %U'"
 
 exec --no-startup-id "sh -c 'sleep 7; exec firefox'"
+exec --no-startup-id mpris-proxy
 # exec --no-startup-id i3-msg 'workspace 1; exec rambox'
 # exec --no-startup-id i3-msg 'workspace 2; exec firefox'
 # exec_always --no-startup-id sbxkb
+#exec --no-startup-id start_conky_solarized
 exec --no-startup-id start_conky_maia
 # exec --no-startup-id start_conky_green
 # exec --no-startup-id xautolock -time 50 -locker blurlock
@@ -431,10 +456,13 @@ set_from_resource $term_color15    color15
 
 # Start i3bar to display a workspace bar (plus the system information i3status if available)
 bar {
-	i3bar_command i3bar -t
-	status_command i3status
+	#i3bar_command i3bar -t
+	#status_command i3status
+	#status_command  ~/bin/test.sh
+    status_command ~/bin/weather.sh
+    tray_output primary
 	# status_command "/etc/spot.sh"
-    position bottom
+    #position bottom
 
 ## please set your primary output first. Example: 'xrandr --output eDP1 --primary'
 #	tray_output primary
@@ -445,18 +473,33 @@ bar {
 #   font pango:monospace 16, Awesome 18
     font xft:URWGothic-Book 12
 	strip_workspace_numbers yes
-
     colors {
-        background #283339
-        statusline #F9FAF9
-        separator  #454947
 
-#                      border  backgr. text
-        focused_workspace  #F9FAF9 #16a085 #292F34
-        active_workspace   #595B5B #353836 #FDF6E3
-        inactive_workspace #595B5B #283339 #EEE8D5
-        binding_mode       #16a085 #2C2C2C #F9FAF9
-        urgent_workspace   #16a085 #FDF6E3 #E5201D
+
+       separator  #93a1a1
+	   background #002b36
+	   statusline #eee8d5
+
+#                             border  backgr. text
+            focused_workspace #2aa198 #2aa198 #073642
+            active_workspace #657b83 #333333 #073642
+            inactive_workspace #073642 #073642 #2aa198
+            urgent_workspace #cb4b16 #cb4b16 #073642
+
+
+
+
+#         background #283339
+#         statusline #F9FAF9
+#         separator  #454947
+# 
+# #                      border  backgr. text
+#         focused_workspace  #F9FAF9 #16a085 #292F34
+#         active_workspace   #595B5B #353836 #FDF6E3
+#         inactive_workspace #595B5B #283339 #EEE8D5
+#         binding_mode       #16a085 #2C2C2C #F9FAF9
+#         urgent_workspace   #16a085 #FDF6E3 #E5201D
+
     }
 }
 
@@ -465,13 +508,13 @@ bindsym $mod+m bar mode toggle
 
 # Theme colors
 # class                   border  backgr. text    indic.   child_border
-  client.focused          #556064 #556064 #80FFF9 #FDF6E3
-  client.focused_inactive #2F3D44 #2F3D44 #1ABC9C #454948
-  client.unfocused        #2F3D44 #2F3D44 #1ABC9C #454948
+  client.focused          #2aa198 #2aa198 #073642 #FDF6E3 #2aa198
+  client.focused_inactive #073642 #073642 #2aa198 #454948 #073642
+  client.unfocused        #073642 #073642 #1ABC9C #454948 #073642
   client.urgent           #CB4B16 #FDF6E3 #1ABC9C #268BD2
   client.placeholder      #000000 #0c0c0c #ffffff #000000 
 
-  client.background       #2B2C2B
+  client.background       #2B2C2B 
 
 #############################
 ### settings for i3-gaps: ###
@@ -485,6 +528,7 @@ gaps outer -4
 # gaps inner|outer current|all set|plus|minus <px>
 # gaps inner all set 10
 # gaps outer all plus 5
+# gaps top -4
 
 # Smart gaps (gaps used if only more than one container on the workspace)
 smart_gaps on

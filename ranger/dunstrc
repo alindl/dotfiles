@@ -83,7 +83,7 @@
     # for longer than idle_threshold seconds.
     # Set to 0 to disable.
     # default 120
-    idle_threshold = 120 
+    idle_threshold = 0 
     
     # Which monitor should the notifications be displayed on.
     monitor = 0
@@ -154,7 +154,7 @@
     icon_path = /usr/share/icons/Adwaita/16x16/status/:/usr/share/icons/Adwaita/16x16/devices/
 
     # Limit icons size.
-    max_icon_size=128
+    max_icon_size = 128
 
 [shortcuts]
 
@@ -178,22 +178,64 @@
     # Context menu.
     context = ctrl+mod1+c
 
+
+# S_base03=#002b36
+# S_base02=#073642
+# S_base01=#586e75
+# S_base00=#657b83
+# S_base0=#839496
+# S_base1=#93a1a1
+# S_base2=#eee8d5
+# S_base3=#fdf6e3
+# 
+# S_yellow=#b58900
+# S_orange=#cb4b16
+# S_red=#dc322f
+# S_magenta=#d33682
+# S_violet=#6c71c4
+# S_blue=#268bd2
+# S_cyan=#2aa198
+# S_green=#859900
+
 [urgency_low]
-    # IMPORTANT: colors have to be defined in quotation marks.
-    # Otherwise the "#" and following would be interpreted as a comment.
-    background = "#000000"
-    foreground = "#EEEFF0"
-    timeout = 10
+# IMPORTANT: colors have to be defined in quotation marks.
+# # Otherwise the "#" and following would be interpreted as a comment.
+frame_color = "#002b36"
+foreground = "#2aa198"
+ background = "#002b36"
+ #background = "#2B313C"
 
-[urgency_normal]
-    background = "#263238"
-    foreground = "#F9FAF9"
-    timeout = 10
+ [urgency_normal]
+ frame_color = "#2aa198"
+ foreground = "#2aa198"
+ background = "#002b36"
+ #background = "#2B313C"
+ timeout = 6
 
-[urgency_critical]
-    background = "#D62929"
-    foreground = "#F9FAF9"
-    timeout = 0
+ [urgency_critical]
+ frame_color = "#dc322f"
+ foreground = "#dc322f"
+ background = "#002b36"
+ #background = "#2B313C"
+ timeout = 8
+
+
+# [urgency_low]
+#     # IMPORTANT: colors have to be defined in quotation marks.
+#     # Otherwise the "#" and following would be interpreted as a comment.
+#     background = "#000000"
+#     foreground = "#EEEFF0"
+#     timeout = 10
+# 
+# [urgency_normal]
+#     background = "#263238"
+#     foreground = "#F9FAF9"
+#     timeout = 10
+# 
+# [urgency_critical]
+#     background = "#D62929"
+#     foreground = "#F9FAF9"
+#     timeout = 0
 
 
 # Every section that isn't one of the above is interpreted as a rules to
@@ -271,35 +313,35 @@
 #    background = "#A8EB41"
 #    foreground = "#FFFFFF"
 
-[Rambox]
-    appname = Rambox
-    background = "#2BACC4"
-    foreground = "#5FCC5D"
-    timeout = 10
-#
-[Spotify]
-    appname = Spotify
-    background = "#000000"
-    foreground = "#5FCC5D"
-    timeout = 10
-#
-[irc]
-    appname = weechat
-    timeout = 0
-    background = "#0033bb"
-    foreground = "#dddddd"
-#
-[weechat hl]
-     appname = weechat
-     category = weechat.HL
-     background = "#FF5C47"
-     foreground = "#FFFFFF"
-#
-[weechat pn]
-     appname = weechat
-     category = weechat.PM
-     background = "#D53B84"
-     foreground = "#FFFFFF"
+# [Rambox]
+#     appname = Rambox
+#     background = "#000000"
+#     foreground = "#2BACC4"
+#     timeout = 10
+# #
+# [Spotify]
+#     appname = Spotify
+#     background = "#000000"
+#     foreground = "#5FCC5D"
+#     timeout = 10
+# #
+# [irc]
+#     appname = weechat
+#     timeout = 0
+#     background = "#0033bb"
+#     foreground = "#dddddd"
+# #
+# [weechat hl]
+#      appname = weechat
+#      category = weechat.HL
+#      background = "#FF5C47"
+#      foreground = "#FFFFFF"
+# #
+# [weechat pn]
+#      appname = weechat
+#      category = weechat.PM
+#      background = "#D53B84"
+#      foreground = "#FFFFFF"
 #
 #[CMUS]
 #    appname = CMUS

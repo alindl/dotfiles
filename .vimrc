@@ -13,7 +13,7 @@ Plugin 'VundleVim/Vundle.vim'
 " The following are examples of different formats supported.
 " Keep Plugin commands between vundle#begin/end.
 " plugin on GitHub repo
-Plugin 'tpope/vim-fugitive'
+" Plugin 'tpope/vim-fugitive'
 " plugin from http://vim-scripts.org/vim/scripts.html
 " Plugin 'L9'
 " Git plugin not hosted on GitHub
@@ -36,10 +36,25 @@ Plugin 'tpope/vim-sexp-mappings-for-regular-people'
 Plugin 'guns/vim-sexp'
 Plugin 'guns/vim-slamhound'
 Plugin 'dgrnbrg/redl'
-
 " HTML and webprogramming stuff
 Plugin 'mattn/emmet-vim.git'
 "Plugin 'tpope/vim-surround.git'
+Plugin 'valloric/MatchTagAlways.git'
+"Plugin 'valloric/YouCompleteMe.git'
+Plugin 'jreybert/vimagit'
+Plugin 'ap/vim-css-color'
+Plugin 'Mizuchi/vim-ranger'
+Plugin 'francoiscabrol/ranger.vim'
+Plugin 'delimitMate.vim'
+" Python virtualenv usage
+Plugin 'plytophogy/vim-virtualenv'
+Plugin 'PieterjanMontens/vim-pipenv'
+" Zettelkasten
+" Plugin 'junegunn/fzf.vim'
+" Plugin 'fiatjaf/neuron.vim'
+
+"Plugin 'vim-scripts/AutoClose.git'
+"Plugin 'Pydiction'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -106,20 +121,20 @@ else
 
 endif " has("autocmd")
 
-set tabstop=4           " Tabs are 4 spaces long 
-set shiftwidth=4        " Shifts are 4 spaces long
-set expandtab           " Tabs are spaces
-set smartindent         " Be smart about indent
-set number              " Line numbering
-set lazyredraw          " redraw only when we need to
-set ignorecase          " Ignore case on searches
-set showcmd             " Show (partial) command in status line
-set showmatch           " Show matching brackets
-set smartcase           " Do smart case matching
-set incsearch           " Incremental search
-set autoindent          " Take indent for new line from previous line
-set confirm             " Ask instead of error on quit
-set wildmenu            " Better command-line completion
+set tabstop=4             " Tabs are 4 spaces long 
+set shiftwidth=4          " Shifts are 4 spaces long
+set expandtab             " Tabs are spaces
+set smartindent           " Be smart about indent
+set number relativenumber " Line numbering
+set lazyredraw            " redraw only when we need to
+set ignorecase            " Ignore case on searches
+set showcmd               " Show (partial) command in status line
+set showmatch             " Show matching brackets
+set smartcase             " Do smart case matching
+set incsearch             " Incremental search
+set autoindent            " Take indent for new line from previous line
+set confirm               " Ask instead of error on quit
+set wildmenu              " Better command-line completion
 
 set backup
 set backupdir=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
